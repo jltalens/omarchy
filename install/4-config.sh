@@ -6,6 +6,54 @@ mkdir -p ~/.local/share/applications
 
 # Use default bashrc from Omarchy
 echo "source ~/.local/share/omarchy/default/bash/rc" >~/.bashrc
+# Same for zsh
+cat <<EOF> ~/.zshrc
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Path to your oh-my-zsh installation.
+ZSH=/usr/share/oh-my-zsh/
+
+export ZSH=/usr/share/oh-my-zsh
+export ZSH_POWER_LEVEL_THEME=/usr/share/zsh-theme-powerlevel10k
+
+source $ZSH_POWER_LEVEL_THEME/powerlevel10k.zsh-theme
+
+plugins=(archlinux 
+	bundler 
+	docker 
+	jsontools 
+	k 
+	tig 
+	gitfast 
+	colored-man-pages
+	colorize 
+	command-not-found 
+	cp 
+	dirhistory 
+	autojump 
+	sudo
+	zsh-syntax-highlighting
+	zsh-autosuggestions) 
+# /!\ zsh-syntax-highlighting and then zsh-autosuggestions must be at the end
+
+source $ZSH/oh-my-zsh.sh
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+DISABLE_AUTO_UPDATE="true"
+
+ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+  mkdir $ZSH_CACHE_DIR
+fi
+
+source $ZSH/oh-my-zsh.sh
+EOF
+echo "source ~/.local/share/omarchy/default/bash/rc" >>~/.zshrc
 
 # Login directly as user, rely on disk encryption + hyprlock for security
 sudo mkdir -p /etc/systemd/system/getty@tty1.service.d

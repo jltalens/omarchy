@@ -4,7 +4,7 @@ if [ -z "$OMARCHY_BARE" ]; then
     signal-desktop spotify dropbox-cli zoom \
     obsidian-bin typora libreoffice obs-studio kdenlive \
     1password-beta 1password-cli gnome-keyring \
-    pinta xournalpp localsend-bin
+    pinta xournalpp localsend-bin pulseaudio
 fi
 
 # Copy over Omarchy applications

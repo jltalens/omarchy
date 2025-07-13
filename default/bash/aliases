@@ -5,6 +5,7 @@ alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 alias cd="zd"
+alias ll='ls -alh'
 zd() {
   if [ $# -eq 0 ]; then
     builtin cd ~ && return
@@ -27,7 +28,6 @@ alias ....='cd ../../..'
 alias n='nvim'
 alias g='git'
 alias d='docker'
-alias r='rails'
 
 # Git
 alias gcm='git commit -m'
