@@ -45,3 +45,6 @@ include "%H/.local/share/omarchy/default/xcompose"
 <Multi_key> <space> <n> : "$OMARCHY_USER_NAME"
 <Multi_key> <space> <e> : "$OMARCHY_USER_EMAIL"
 EOF
+
+# Checkout my .dotfiles folder
+git clone git@github.com:jltalens/.dotfiles.git ~/.local/share/dotfiles
