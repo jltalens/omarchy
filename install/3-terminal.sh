@@ -4,11 +4,5 @@ yay -S --noconfirm --needed \
   wl-clipboard fastfetch btop \
   man tldr less whois plocate bash-completion \
   alacritty zsh zsh-completions oh-my-zsh-git \
-  zsh-theme-powerlevel10k-git
+  zsh-theme-powerlevel10k-git ttf-hack-nerd
 
-echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-
-pacaur -S nerd-fonts-hack
-
-# Make zsh default
-chsh -s /usr/bin/zsh

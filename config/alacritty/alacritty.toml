@@ -15,7 +15,12 @@ padding.y = 14
 decorations = "None"
 opacity = 0.98
 
+[terminal.shell]
+program = "/usr/bin/zsh"
+
 [keyboard]
 bindings = [
 { key = "F11", action = "ToggleFullscreen" }
 ]
+
+[terminal]
