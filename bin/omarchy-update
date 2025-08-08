@@ -1,31 +1,27 @@
 #!/bin/bash
 
-cd ~/.local/share/omarchy
+# Exit immediately if a command exits with a non-zero status
+set -e
 
-if [[ $1 == "all" ]]; then
-  # Run all migrations
-  last_updated_at=1
-else
-  # Remember the version we're at before upgrading
-  last_updated_at=$(git log -1 --format=%cd --date=unix)
+# Show logo
+clear
+cat <~/.local/share/omarchy/logo.txt
+
+# Get the latest while trying to preserve any modifications
+omarchy_path=~/.local/share/omarchy
+git -C $omarchy_path pull --autostash
+git -C $omarchy_path diff --check || git -C $omarchy_path reset --merge
+
+# Run migrations
+~/.local/share/omarchy/bin/omarchy-migrate
+
+# Update system packages
+echo -e "\e[32m\nUpdate system packages\e[0m"
+yay -Syu --noconfirm
+
+# Offer to reboot if the kernel has been changed
+if [ "$(uname -r | sed 's/-arch/\.arch/')" != "$(pacman -Q linux | awk '{print $2}')" ]; then
+  gum confirm "Linux kernel has been updated. Reboot?" && sudo reboot now
 fi
 
-# Get the latest
-git pull
-
-# Run any pending migrations
-for file in migrations/*.sh; do
-  filename=$(basename "$file")
-  migrate_at="${filename%.sh}"
-
-  if [ $migrate_at -gt $last_updated_at ]; then
-    echo -e "\e[32m\nRunning migration ($migrate_at)\e[0m"
-    source $file
-  fi
-done
-
-# Back to where we came from
-cd - >/dev/null
-
-echo -e "\e[32m\nUpdating system packages\e[0m"
-yay -Syu --noconfirm
+~/.local/share/omarchy/bin/omarchy-show-done
