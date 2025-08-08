@@ -4,7 +4,7 @@
 # This can happen if archinstall used ethernet
 if ! command -v iwctl &>/dev/null; then
   yay -S --noconfirm --needed iwd
-  sudo systemctl enable --now iwd.service
+  sudo systemctl enable --now iwd.service systemd-resolved.service
 fi
 
 # Fix systemd-networkd-wait-online timeout for multiple interfaces

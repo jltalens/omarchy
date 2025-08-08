@@ -35,6 +35,16 @@ if ! command -v yay &>/dev/null; then
   cd ~
 fi
 
+if ! command -v pacaur &>/dev/null; then
+  cd /tmp
+  git clone https://aur.archlinux.org/pacaur.git
+  cd packaur
+  makepkg -si --noconfirm
+  cd -
+  rm -rf pacaur
+  cd ~
+fi
+
 # Add fun and color to the pacman installer
 if ! grep -q "ILoveCandy" /etc/pacman.conf; then
   sudo sed -i '/^\[options\]/a Color\nILoveCandy' /etc/pacman.conf
